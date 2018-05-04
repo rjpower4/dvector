@@ -1,3 +1,3 @@
 # dvector
-## C implementation of dynamic vector data structure for doubles
+C implementation of dynamic vector data structure for doubles
 Rolfe Power
