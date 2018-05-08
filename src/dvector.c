@@ -1,4 +1,17 @@
+#include <stdio.h>
+#include <string.h>
 #include "dvector.h"
+
+/*Print a dvector*/
+void dvector_print(dvector* v) {
+    if (v && v->arr && v->size > 0) {
+        printf("[");
+        for (size_t i = 0; i < v->size; i++) {
+            printf("%1.4g, ", v->arr[i]);
+        }
+        printf("\b\b]\n");
+    }
+}
 
 /*Allocate a new dvector
   If 0 is passed as the length, then use default initial size
@@ -35,6 +48,22 @@ dvector* dvector_alloc(size_t n) {
     return ret;
 }
 
+/*Create a new copy of a vector*/
+dvector* dvector_copy(dvector* v) {
+    dvector* out = dvector_alloc(v->capacity);
+    if (!out) {
+        return NULL;
+    }
+
+    out->size = v->size;
+
+    if (v->arr) {
+        out->arr = memcpy(out->arr, v->arr, v->capacity * sizeof(double));
+    }
+
+    return out;
+}
+
 /*Deallocate an existing dvector*/
 int dvector_dealloc(dvector* v) {
     if (!v) { // Null vector passed in, don't do anything
@@ -48,6 +77,15 @@ int dvector_dealloc(dvector* v) {
 
     free(v);
     return EXIT_SUCCESS;
+}
+
+/*Get size of vector*/
+size_t dvector_size(dvector* v) {
+    if (!v) {
+        return 0;
+    }
+
+    return v->size;
 }
 
 /*Push value onto the end*/
@@ -71,6 +109,16 @@ int dvector_push(dvector* v, double val) {
     return EXIT_SUCCESS;
 }
 
+/*Set Value*/
+int dvector_set(dvector* v, size_t ind, double val) {
+    if (!v || !(v->arr) || ind >= v->size) {
+        return EXIT_FAILURE;
+    }
+
+    v->arr[ind] = val;
+    return EXIT_SUCCESS;
+}
+
 /*Get value*/
 int dvector_get(dvector* v, size_t ind, double* ret) {
     if (!v || !(v->arr)) {
@@ -82,7 +130,7 @@ int dvector_get(dvector* v, size_t ind, double* ret) {
     *ret = v->arr[ind];
 }
 
-/* Resize the vector */
+/*Resize the vector */
 int dvector_resize(dvector* v, size_t new_cap) {
     if (!v) {
         return EXIT_FAILURE;
@@ -101,3 +149,49 @@ int dvector_resize(dvector* v, size_t new_cap) {
 
     v->arr = new_arr;
 }
+
+/*Sum the elements in a vector*/
+int dvector_sum(dvector* v, double* sum) {
+    size_t i;
+    *sum = 0;
+
+    if (!v || !(v->arr)) {
+        return EXIT_FAILURE;
+    }
+
+    for(i = 0; i < v->size; i++) {
+        *sum += v->arr[i];
+    }
+
+    return EXIT_SUCCESS;
+}
+
+/*Dot product between two vectors*/
+int dvector_dot(dvector* v1, dvector* v2, double* out) {
+    if (!v1 || !v2 || !(v1->arr) || !(v2->arr) || v1->size != v2->size) {
+        return EXIT_FAILURE;
+    }
+
+    double dot = 0;
+    for (size_t i = 0; i < v1->size; i++) {
+        dot += v1->arr[i] * v2->arr[i];
+    }
+
+    *out = dot;
+
+    return  EXIT_SUCCESS;
+}
+
+/*Add two vectors*/
+int dvector_add(dvector* v1, dvector* v2, double* out) {
+    if (!v1 || !v2 || !(v1->arr) || !(v2->arr) || v1->size != v2->size) {
+        return EXIT_FAILURE;
+    }
+
+    for (size_t i = 0; i < v1->size; i++) {
+        v1->arr[i] += v2->arr[i];
+    }
+
+    return EXIT_SUCCESS;
+}
+
