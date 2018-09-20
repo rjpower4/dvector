@@ -5,3 +5,6 @@ target_link_libraries(test_alloc_dealloc dvector)
 
 add_executable(test_push_get test_push_get.c)
 target_link_libraries(test_push_get dvector)
+
+add_executable(test_ops test_ops.c)
+target_link_libraries(test_ops dvector)

@@ -47,6 +47,6 @@ int dvector_sum(dvector* v, double* sum);
 int dvector_dot(dvector* v1, dvector* v2, double* out);
 
 /*Add two vectors -- puts result in v1*/
-int dvector_add(dvector* v1, dvector* v2, double* out);
+int dvector_add(dvector* v1, dvector* v2);
 
 #endif

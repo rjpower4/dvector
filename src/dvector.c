@@ -183,7 +183,7 @@ int dvector_dot(dvector* v1, dvector* v2, double* out) {
 }
 
 /*Add two vectors*/
-int dvector_add(dvector* v1, dvector* v2, double* out) {
+int dvector_add(dvector* v1, dvector* v2) {
     if (!v1 || !v2 || !(v1->arr) || !(v2->arr) || v1->size != v2->size) {
         return EXIT_FAILURE;
     }
