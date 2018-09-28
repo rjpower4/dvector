@@ -8,3 +8,9 @@ target_link_libraries(test_push_get dvector)
 
 add_executable(test_ops test_ops.c)
 target_link_libraries(test_ops dvector)
+
+add_executable(test_max_min test_max_min.c)
+target_link_libraries(test_max_min dvector)
+
+add_executable(test_norm test_norm.c)
+target_link_libraries(test_norm dvector)
