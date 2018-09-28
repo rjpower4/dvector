@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 #include "dvector.h"
 
 /*Print a dvector*/
@@ -195,3 +196,61 @@ int dvector_add(dvector* v1, dvector* v2) {
     return EXIT_SUCCESS;
 }
 
+/*Take the norm of a vector */
+int dvector_norm(dvector* v, double* out) {
+    if (!v) {
+        *out = 0;
+        return EXIT_FAILURE;
+    }
+
+    *out = 0;
+
+    if ((v->arr) && v->size != 0) {
+        for (size_t i = 0; i < v->size; i++) {
+            *out += v->arr[i] * v->arr[i];
+        }
+        *out = sqrt(*out);
+    }
+
+    return EXIT_SUCCESS;
+}
+
+/* Get the minimum of a vector */
+int dvector_min(dvector* v, double* out) {
+    if (!v || !(v->arr)) {
+        return EXIT_FAILURE;
+    }
+
+    if (v->size == 0) {
+        return EXIT_FAILURE;
+    } else {
+        *out = v->arr[0];
+    }
+
+    for(size_t i = 1; i < v->size; i++) {
+        if (*out > v->arr[i]) {
+            *out = v->arr[i];
+        }
+    }
+    return EXIT_SUCCESS;
+}    
+
+/* Get the maximum element in a vector */
+int dvector_max(dvector* v, double* out) {
+    if (!v || !(v->arr)) {
+        return EXIT_FAILURE;
+    }
+
+    if (v->size == 0) {
+        return EXIT_FAILURE;
+    } else {
+        *out = v->arr[0];
+    }
+
+    for (size_t i = 1; i < v->size; i++) {
+        if (*out < v->arr[i]) {
+            *out = v->arr[i];
+        }
+    }
+    return EXIT_SUCCESS;
+}

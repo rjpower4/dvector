@@ -49,4 +49,15 @@ int dvector_dot(dvector* v1, dvector* v2, double* out);
 /*Add two vectors -- puts result in v1*/
 int dvector_add(dvector* v1, dvector* v2);
 
+/* Take the norm of a vector */
+int dvector_norm(dvector* v, double* out);
+
+/* Get the minimum  element in a vector */
+int dvector_min(dvector* v, double* out);
+
+/* Get the maximum element in a vector */
+int dvector_max(dvector* v, double* out);
+
+
+
 #endif
