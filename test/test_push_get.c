@@ -16,7 +16,7 @@ int main() {
     double values[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
     // Allocate the vector
-    v = dvector_alloc(10);
+    v = dvector_alloc(5);
 
     // Check to make sure that the allocation was successful
     if (!v) {

@@ -143,12 +143,13 @@ int dvector_resize(dvector* v, size_t new_cap) {
     }
 
     // Reallocate with new size
-    double* new_arr = realloc(v->arr, new_cap);
+    double* new_arr = realloc(v->arr, new_cap*sizeof(double));
     if (!(new_arr)) {
         return EXIT_FAILURE;
     }
 
     v->arr = new_arr;
+    v->capacity = new_cap;
 }
 
 /*Sum the elements in a vector*/
